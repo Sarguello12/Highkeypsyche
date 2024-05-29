@@ -4,11 +4,17 @@ import App from './App.tsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import ErrorPage from './pages/ErrorPage.tsx'
+import CalendarPage from './pages/CalendarPage.tsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/calendar",
+    element: <CalendarPage />,
     errorElement: <ErrorPage />
   },
 ])
