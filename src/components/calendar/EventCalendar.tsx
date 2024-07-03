@@ -1,11 +1,6 @@
-import { useState, MouseEvent } from "react"
+import { useState, MouseEvent, useMemo } from "react"
 import { Box, Button, ButtonGroup, Card, CardContent, CardHeader, Container, Divider } from "@mui/material"
 import { Calendar, type Event } from "react-big-calendar"
-// import format from "date-fns/format"
-// import parse from "date-fns/parse"
-// import startOfWeek from "date-fns/startOfWeek"
-// import getDay from "date-fns/getDay"
-
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import { DatePickerData, EventFormData, IEventInfo, ITodo } from '../../shared/types'
 import { generateGUID } from '../../shared/master'
@@ -97,6 +92,9 @@ const EventCalendar = () => {const [openSlot, setOpenSlot] = useState<boolean>(f
     setEventInfoModal(false)
   }
 
+  // calendar views
+  const { views } = useMemo(() => ({ views: { month: true, week: true } }), [])
+
   return (
     <Box
       mt={2}
@@ -109,7 +107,7 @@ const EventCalendar = () => {const [openSlot, setOpenSlot] = useState<boolean>(f
     >
       <Container maxWidth={false}>
         <Card>
-          <CardHeader title="Calendar" subheader="Create Events and Todos and manage them easily" />
+          <CardHeader title="Event Calendar" />
           <Divider />
           <CardContent>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -160,7 +158,7 @@ const EventCalendar = () => {const [openSlot, setOpenSlot] = useState<boolean>(f
               startAccessor="start"
               components={{ event: EventInfo }}
               endAccessor="end"
-              defaultView="week"
+              defaultView="month"
               eventPropGetter={(event) => {
                 const hasTodo = todos.find((todo) => todo._id === event.todoId)
                 return {
@@ -173,6 +171,7 @@ const EventCalendar = () => {const [openSlot, setOpenSlot] = useState<boolean>(f
               style={{
                 height: 900,
               }}
+              views={views}
             />
           </CardContent>
         </Card>
