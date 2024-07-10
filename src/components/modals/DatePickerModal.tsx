@@ -54,6 +54,7 @@ const DatePickerModal = ({
   }
 
   const handleTodoChange = (e: React.SyntheticEvent, value: ITodo | null) => {
+    e.preventDefault()
     setDatePickerEventFormData((prevState) => ({
       ...prevState,
       todoId: value?._id,

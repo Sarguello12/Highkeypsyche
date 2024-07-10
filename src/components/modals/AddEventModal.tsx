@@ -11,6 +11,7 @@ import {
   Box,
 } from "@mui/material"
 import { EventFormData, ITodo } from '../../shared/types'
+import React from 'react'
 
 interface IProps {
   open: boolean
@@ -34,6 +35,7 @@ const AddEventModal = ({ open, handleClose, eventFormData, setEventFormData, onA
   }
 
   const handleTodoChange = (e: React.SyntheticEvent, value: ITodo | null) => {
+    e.preventDefault()
     setEventFormData((prevState) => ({
       ...prevState,
       todoId: value?._id,
