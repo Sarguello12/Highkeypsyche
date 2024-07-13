@@ -1,8 +1,9 @@
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import HomeIcon from '@mui/icons-material/Home';
 import { Dispatch, SetStateAction, useMemo, useState } from 'react';
 import { Anchor } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 type SidebarProps = {
   sidebarState: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -31,16 +32,18 @@ const Sidebar = (props: SidebarProps) => {
       onKeyDown={() => setToggleDrawer(!toggleDrawer)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem>
+          <ListItemButton component={Link} to="/">
+            <ListItemIcon><HomeIcon /></ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton component={Link} to="/calendar">
+            <ListItemIcon><CalendarMonthIcon /></ListItemIcon>
+            <ListItemText primary="Calendar" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
